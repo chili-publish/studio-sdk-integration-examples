@@ -7,7 +7,7 @@ We strongly advice to always run your code in a local webserver.
 
 To integrate and start using the SDK, you will need to be accepted to the Early Access program, reach out to your contact @chili to receive more information. Once accepted, you will receive the needed credentials to configure and setup the SDK.
 
-## Doxumentation
+## Documentation
 
 [Link to the official SDK documentation on GitHub](https://chili-publish.github.io/editor-sdk/)
 
