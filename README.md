@@ -1,4 +1,4 @@
-# Edtitor SDK Integration Examples
+# Editor SDK Integration Examples
 
 In this repository you can find some examples on integrating the editor-sdk.
 We strongly advice to always run your code in a local webserver.
