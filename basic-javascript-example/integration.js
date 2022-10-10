@@ -9,9 +9,6 @@ const SDK = new window.ChiliEditorSDK.SDK({
   onSelectedFrameContentChanged: (selectedFrameContent) => {
     onFrameContentChange(selectedFrameContent);
   },
-  onSelectedLayoutPropertiesChanged: () => {},
-  onFrameAnimationsChanged: () => {},
-  onScrubberPositionChanged: () => {},
   onSelectedToolChanged: (tool) => {
     onToolChanged(tool);
   },
