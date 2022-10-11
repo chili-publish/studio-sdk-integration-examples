@@ -1,11 +1,11 @@
 # Editor SDK Integration Examples
 
 In this repository you can find some examples on integrating the editor-sdk.
-We strongly advice to always run your code in a local webserver.
+We strongly advice to always run your code in a local webserver to ensure all functions are available.
 
 ## Early Access Program
 
-To integrate and start using the SDK, you will need to be accepted to the Early Access program, reach out to your contact @chili to receive more information. Once accepted, you will receive the needed credentials to configure and setup the SDK.
+This repository is part of the CHILI publish Early Access program in preparation of SpicyTalks. If you want to know more, reach out to your main CHILI contact.
 
 ## Documentation
 
