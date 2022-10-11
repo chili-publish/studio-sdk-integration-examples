@@ -1,6 +1,3 @@
-// Define the url to the editor
-const editorLink = "https://link/to/editor";
-
 // Initialise SDK
 const SDK = new window.ChiliEditorSDK.SDK({
   onStateChanged: (state) => {
@@ -12,32 +9,14 @@ const SDK = new window.ChiliEditorSDK.SDK({
   onSelectedFrameContentChanged: (selectedFrameContent) => {
     onFrameContentChange(selectedFrameContent);
   },
-  onSelectedLayoutPropertiesChanged: () => {},
-  onFrameAnimationsChanged: () => {},
-  onScrubberPositionChanged: () => {},
   onSelectedToolChanged: (tool) => {
     onToolChanged(tool);
   },
-  editorLink,
   editorId: "chili-editor-example",
 });
 
-// function to fetch demo-document from editor and pass it to the SDK to load it in
-const fetchDocumentAndPassIt = async () => {
-  const demoDocumentResponse = await fetch(
-    editorLink + "/assets/assets/documents/demo.json"
-  );
-  if (demoDocumentResponse) {
-    const demoDocument = await demoDocumentResponse.json();
-    SDK.document.loadDocument(JSON.stringify(demoDocument));
-  }
-};
-
 // Initialise editor
 SDK.loadEditor();
-
-// Pass the document to the editor
-fetchDocumentAndPassIt();
 
 // Tool selection and change
 const useSelectTool = () => {
