@@ -46,7 +46,7 @@ async function configureConnector() {
 
   const onQueryChange = () => {
     // update the frame content
-    var queryContext = new Object() as any;
+    let queryContext = new Object() as unknown;
   
     if (extraInput.checked) {
       // this is a demo of adding additional context to the connector. These extra options can be passed
