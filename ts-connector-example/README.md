@@ -1,5 +1,7 @@
-# Basic TypeScript and NPM example of SDK usage
-This basic example shows how simple it is to make a TypeScript integration, as well as using the SDK via NPM instead of a script.
+# Basic Studio Connector example of SDK usage
+This is a preview of how connectors will work on the GraFx platform. 
+
+In this example we show how to setup and use a very simple media connector. 
 
 ## How to run
 ### Install dependencies
