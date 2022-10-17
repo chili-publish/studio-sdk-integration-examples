@@ -1,0 +1,12 @@
+{
+  "id": "demo-connector",
+  "version": "1.0.0",
+  "name": "demo",
+  "type": "media",
+  "supportedAuth": [
+    "none"
+  ],
+  "options": {
+  },
+  "script": "class DemoConnector {\r\n    constructor(runtime) {\r\n        this.runtime = runtime;\r\n    }\r\n    async query(options, context) {\r\n        var data = [\r\n            { id: 'demo-1', type: 0, name: 'Demo 1', relativePath: '\/root', metaData: {} },\r\n            { id: 'demo-2', type: 0, name: 'Demo 2', relativePath: '\/root', metaData: {} },\r\n            { id: 'demo-3', type: 0, name: 'Demo 3', relativePath: '\/root', metaData: {} },\r\n        ];\r\n        if (context['extraItem']) {\r\n            data = [...data, { id: 'demo-4', type: 0, name: 'Demo 4 (extra)', relativePath: '\/root', metaData: {} }];\r\n        }\r\n        if (options.filter) {\r\n data = data.filter(item => { return item.name.toLowerCase().includes(options.filter[0].toLowerCase()); });\r\n        }\r\n        return Promise.resolve({ pageSize: 3, data: data, links: { nextPageToken: '' } });\r\n    }\r\n    async download(id, previewType, context) {\r\n        return (await this.runtime.fetch(`https:\/\/dummyimage.com\/600x400\/000\/fff&text=${id}`, {})).arrayBuffer;\r\n    }\r\n    upload(name, blob) {\r\n        throw new Error('Method not implemented.');\r\n    }\r\n    remove(id) {\r\n        throw new Error('Method not implemented.');\r\n    }\r\n    copy(id, newName) {\r\n        throw new Error('Method not implemented.');\r\n    }\r\n    getQueryOptions() {\r\n        return ['extraItem'];\r\n    }\r\n    getDownloadOptions() {\r\n        return [];\r\n    }\r\n    getCapabilities() {\r\n        return {\r\n            copy: false,\r\n            filtering: true,\r\n            query: true,\r\n            remove: false,\r\n            upload: false\r\n        };\r\n    }\r\n}\r\n"
+}
