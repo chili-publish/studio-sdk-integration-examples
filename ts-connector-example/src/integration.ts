@@ -44,7 +44,7 @@ async function configureConnector() {
     SDK.frame.setImageFromConnector(newFrameId, 'demo-connector', downloadInput.value);
   });
 
-  var onQueryChange = () => {
+  const onQueryChange = () => {
     // update the frame content
     var queryContext = new Object() as any;
   
