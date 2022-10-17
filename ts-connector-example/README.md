@@ -3,6 +3,9 @@ This is a preview of how connectors will work on the GraFx platform.
 
 In this example we show how to setup and use a very simple media connector. 
 
+If you want to know more about Connectors, and how to create your own, check [our documentation](https://github.com/chili-publish/grafx-connector-template/tree/main/docs)
+ 
+
 ## How to run
 ### Install dependencies
 
