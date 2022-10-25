@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studio Connector Integrator Demo | CHILI publish</title>
+    <link rel="stylesheet" href="assets/styles/reset.css" />
+    <link rel="stylesheet" href="assets/styles/main.css" />
+  </head>
+  <body>
+    <h1 class="page-title">Studio Connector Integrator Demo | CHILI publish</h1>
+    <div class="container">
+      <!-- editor div here -->
+      <div class="editor-container" id="chili-editor-example"></div>
+      <!-- editor controls here -->
+      <div class="editor-controls">
+        <section class="buttons-container">
+
+        </section>
+        <div class="panels-container">
+          <section class="left-panel">
+            <article class="frame-content">
+              <h2>Frame content</h2>
+              <div class="frame-row">
+                <label for="frame-text">Frame Text:</label>
+                <input id="frameText" name="frame-text" value="" />
+              </div>
+              <div class="frame-row">
+                <label for="connector-query">Connector Query:</label>
+                <input id="connectorQuery" type="text" name="connector-query" value="" />
+                <label for="connector-query-extra">Include Extra Item?:</label>
+                <input id="connectorQueryExtra" type="checkbox" name="connector-query-extra" value="" />
+              </div>
+            </article>
+          </section>
+          <section class="right-panel">
+            <article class="query-list">
+              <h2>Query Results</h2>
+              <ul id="queryResultList">
+              </ul>
+            </article>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- scripts here -->
+    <script src="build/index.js"></script>
+  </body>
+</html>
