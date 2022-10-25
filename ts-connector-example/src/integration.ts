@@ -1,4 +1,5 @@
-import ChiliEditorSDK, { FrameTypeEnum } from "@chili-publish/editor-sdk";
+import ChiliEditorSDK, { FrameTypeEnum, MetaData } from "@chili-publish/editor-sdk";
+import { ConnectorRegistrationSource, ConnectorType } from "@chili-publish/editor-sdk/lib/types/ConnectorTypes";
 
 declare global {
   interface Window {
@@ -25,9 +26,8 @@ async function configureConnector() {
   await SDK.document.loadDocument('{}');
 
   // register the custom connector
-  const doc = { name: 'demo-connector', id: 'demo-connector', type: 'media', source: 'url', url: './assets/connectors/demo-connector.json' };
+  const doc = { id: 'demo-connector',  source: ConnectorRegistrationSource.url, url: './assets/connectors/demo-connector.json' };
 
-  // @ts-ignore 
   await SDK.connector.registerConnector(doc);
 
   // add a new frame at location
@@ -46,25 +46,25 @@ async function configureConnector() {
 
   const onQueryChange = () => {
     // update the frame content
-    let queryContext = new Object() as unknown;
-  
+    let queryContext = new ConnectorMetaData();
+
     if (extraInput.checked) {
       // this is a demo of adding additional context to the connector. These extra options can be passed
       // manually like this, or be directly tied to the variables. To connect a connector query option 
       // to a variable, we need to define a mapping like { 'query.[option]', 'var.[variableId]' }
-      queryContext['extraItem'] = '1';
+      queryContext.extraItem = '1';
     }
-  
+
     // call the query method of the connector, using the variable input
     SDK.mediaConnector.query('demo-connector', { filter: [queryInput.value] }, queryContext).then((result) => {
       // allow result inspection
       console.log(result);
-  
+
       if (result.success) {
         const listContainer = document.getElementById("queryResultList");
         // Empty list on rerender
         listContainer.innerHTML = "";
-  
+
         // loop all media results and render them + add dynamic onClick handler
         result.parsedData.data.map((mediaItem) => {
           const item = document.createElement("li");
@@ -86,4 +86,8 @@ async function configureConnector() {
 
 window.onMediaItemClick = async (item: string, frameId: number) => {
   await SDK.frame.setImageFromConnector(frameId, 'demo-connector', item);
+}
+
+class ConnectorMetaData implements MetaData {
+  [key: string]: string;
 }

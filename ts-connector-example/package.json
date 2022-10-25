@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@chili-publish/editor-sdk": "^0.71.0"
+    "@chili-publish/editor-sdk": "^0.77.2"
   },
   "devDependencies": {
     "ts-loader": "^9.2.8",
