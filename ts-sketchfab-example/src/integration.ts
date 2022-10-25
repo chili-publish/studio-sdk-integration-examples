@@ -1,3 +1,4 @@
+import html2canvas from 'html2canvas';
 import ChiliEditorSDK from "@chili-publish/editor-sdk";
 import type {
   FrameLayoutType,
@@ -11,48 +12,49 @@ import Sketchfab from '@sketchfab/viewer-api';
 
 declare global {
   interface Window {
-    playAnimation: () => void;
-    useSelectTool: () => void;
-    useHandTool: () => void;
-    useZoomTool: () => void;
-    onLayoutClick: (id: number) => void;
+    sketchFabLoad: () => void;
+    sketchFabToggleAR: () => void;
+    sketchFabSetTexture: () => void;
+    sketchFabSetTextureVideo: () => void;
   }
 }
 
 // Initialise SDK
 const SDK = new ChiliEditorSDK({
-  onStateChanged: (state) => {
-    onLayoutsChanged(state.layouts, state.selectedLayoutId);
-  },
-  onSelectedFrameLayoutChanged: (selectedFrameLayout) => {
-    onFrameLayoutChange(selectedFrameLayout);
-  },
-  onSelectedFrameContentChanged: (selectedFrameContent) => {
-    onFrameContentChange(selectedFrameContent);
-  },
-  onSelectedToolChanged: (tool) => {
-    onToolChanged(tool);
-  },
   editorId: "chili-editor-example",
 });
 
 // Initialise editor
 SDK.loadEditor();
 
-// Tool selection and change
-window.useSelectTool = () => {
-  SDK.tool.setSelectTool();
+
+window.sketchFabToggleAR = async () => {
+
+  var api = await sketchFabApi;
+  api.startAR(function (err:any) {
+    if (!err) {
+      window.console.log('Starting AR');
+    }
+  })
 };
 
-window.useHandTool = () => {
-  SDK.tool.setHandTool();
+window.sketchFabSetTexture = async () => {
+  
+  var sf = await sketchFabApi;
+  
+  var canvas = await html2canvas(document.getElementById("chili-editor-example"));
+  var url = canvas.toDataURL();
+
+  console.log(url);
+
+  sf.updateTexture(url, "11f2dc4d5b68423bb482c252e445f515", function (err: any, textureUid: any) {
+    if (!err) {
+      window.console.log('Replaced texture with UID', textureUid);
+    }
+  });
 };
 
-window.useZoomTool = () => {
-  SDK.tool.setZoomTool();
-};
-
-const onToolChanged = (tool: ToolType) => {
+const sketchFabSetTextureVideo = (tool: ToolType) => {
   if (tool) {
     const toolLabel = document.getElementById("toolLabel");
     toolLabel.textContent = "Selected tool: " + tool;
@@ -60,84 +62,16 @@ const onToolChanged = (tool: ToolType) => {
 };
 
 // Play animtion
-window.playAnimation = async () => {
-  var sf = await ensureSketchfabIsSet(5000);
+window.sketchFabLoad = async () => {
+  var sf = await sketchFabApi;
   sf.getTextureList(function (err: any, textures: any) {
     if (!err) {
       window.console.log(textures);
     }
   });
-
-  sf.updateTexture('https://dummyimage.com/600x400/abc/fff', "11f2dc4d5b68423bb482c252e445f515", function (err: any, textureUid: any) {
-    if (!err) {
-      window.console.log('Replaced texture with UID', textureUid);
-    }
-  });
 };
 
-// Functions on frame selection
-const onFrameContentChange = (selectedFrameContent: FrameType) => {
-  if (selectedFrameContent) {
-    const frameTitleInput = document.getElementById("frameTitle");
-    frameTitleInput.setAttribute("value", selectedFrameContent.frameName);
-
-    const frameTypeInput = document.getElementById("frameType");
-    frameTypeInput.setAttribute("value", selectedFrameContent.frameType);
-  }
-};
-const onFrameLayoutChange = (selectedFrameLayout: FrameLayoutType) => {
-  if (selectedFrameLayout) {
-    const frameXInput = document.getElementById("frameX");
-    frameXInput.setAttribute("value", selectedFrameLayout.x.value.toString());
-
-    const frameYInput = document.getElementById("frameY");
-    frameYInput.setAttribute("value", selectedFrameLayout.y.value.toString());
-
-    const frameWidthInput = document.getElementById("frameWidth");
-    frameWidthInput.setAttribute(
-      "value",
-      selectedFrameLayout.width.value.toString()
-    );
-
-    const frameHeightInput = document.getElementById("frameHeight");
-    frameHeightInput.setAttribute(
-      "value",
-      selectedFrameLayout.height.value.toString()
-    );
-  }
-};
-
-// Select a layout
-window.onLayoutClick = (id: number) => {
-  SDK.layout.selectLayout(id);
-};
-// Function on when a layout has been changed
-const onLayoutsChanged = (
-  layouts: LayoutWithFrameProperties[],
-  selectedLayout: number
-) => {
-  if (layouts && layouts.length) {
-    const listContainer = document.getElementById("layoutList");
-    // Empty list on rerender
-    listContainer.innerHTML = "";
-
-    // loop all layouts and render them + add dynamic onClick handler
-    layouts.map((layout) => {
-      const item = document.createElement("li");
-      item.setAttribute("class", "layout-item");
-      item.setAttribute("id", layout.layoutId.toString());
-      if (layout.layoutId === selectedLayout) {
-        item.className = `${item.classList} selected`;
-      }
-      item.setAttribute("onclick", `onLayoutClick(${layout.layoutId})`);
-      const itemText = document.createTextNode(layout.layoutName);
-      item.appendChild(itemText);
-      listContainer.appendChild(item);
-    });
-  }
-};
-
-var sketchFabApi: any = null;
+var sketchFabApi: any = ensureSketchfabIsSet(5000);
 
 // This is the promise code, so this is the useful bit
 function ensureSketchfabIsSet(timeout: number): Promise<any> {

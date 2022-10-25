@@ -9,7 +9,8 @@
   "private": false,
   "dependencies": {
     "@chili-publish/editor-sdk": "^0.70.3",
-    "@sketchfab/viewer-api": "^1.12.1"
+    "@sketchfab/viewer-api": "^1.12.1",
+    "html2canvas": "^1.4.1"
   },
   "devDependencies": {
     "ts-loader": "^9.2.8",

@@ -19,13 +19,11 @@
     <!-- editor controls here -->
     <div class="editor-controls">
       <section class="buttons-container">
-        <button onclick="useSelectTool()">Use selecttool</button>
-        <button onclick="useZoomTool()">Use zoomtool</button>
-        <button onclick="useHandTool()">Use handtool</button>
-        <span id="toolLabel"></span>
+        <button onclick="sketchFabLoad()">Load SketchFab Model</button>
+        <button onclick="sketchFabToggleAR()">Toggle AR</button>
+        <button onclick="sketchFabSetTexture()">Set to screenshot editor</button>
+        <button onclick="sketchFabSetTextureVideo()">Set to mp4 output</button>
         <br />
-        <br />
-        <button onclick="playAnimation()">Play animation</button>
       </section>
       <iframe src="" id="api-frame" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
         execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true"

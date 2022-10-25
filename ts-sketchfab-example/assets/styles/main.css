@@ -13,12 +13,21 @@ body {
 .container {
     width: 100%;
     height: 70vh;
+    display: flex;
+}
+
+.editor-controls {    
+    width: 75%;
+}
+
+.editor-controls iframe {    
+    width: 100%;
+    height:100%;
 }
 
 .editor-container {
-    width: 100%;
+    width: 25%;
     height: 100%;
-    min-height: 100%;;   
 }
 
 .editor-container iframe {
