@@ -22,6 +22,7 @@ declare global {
 // Initialise SDK
 const SDK = new ChiliEditorSDK({
   editorId: "chili-editor-example",
+  editorLink: "https://storageeditor2.blob.core.windows.net/editor/EDT-635/web"
 });
 
 // Initialise editor
@@ -40,10 +41,15 @@ window.sketchFabToggleAR = async () => {
 
 window.sketchFabSetTexture = async () => {
   
-  var sf = await sketchFabApi;
+  var sf = await sketchFabApi;  
   
-  var canvas = await html2canvas(document.getElementById("chili-editor-example"));
-  var url = canvas.toDataURL();
+  const privateApi = await SDK.editorAPI;
+  //@ts-ignore
+  const result = (await privateApi.getPageSnapshot()) as Uint8Array;
+
+  console.log(result);
+
+  const url = await blobToDataURL(new Blob([result], { type: "image/png" }));
 
   console.log(url);
 
@@ -53,6 +59,16 @@ window.sketchFabSetTexture = async () => {
     }
   });
 };
+
+function blobToDataURL(blob: Blob): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = _e => resolve(reader.result as string);
+    reader.onerror = _e => reject(reader.error);
+    reader.onabort = _e => reject(new Error("Read aborted"));
+    reader.readAsDataURL(blob);
+  });
+}
 
 const sketchFabSetTextureVideo = (tool: ToolType) => {
   if (tool) {
