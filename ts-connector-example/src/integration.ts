@@ -1,9 +1,9 @@
 import ChiliEditorSDK, { FrameTypeEnum, MetaData } from "@chili-publish/editor-sdk";
-import { ConnectorRegistrationSource, ConnectorType } from "@chili-publish/editor-sdk/lib/types/ConnectorTypes";
+import { ConnectorRegistrationSource} from "@chili-publish/editor-sdk/lib/types/ConnectorTypes";
 
 declare global {
   interface Window {
-    onMediaItemClick: (item: string, frameId: number) => Promise<void>;
+    onMediaItemClick: (item: string, frameId: string) => Promise<void>;
   }
 }
 
@@ -32,7 +32,7 @@ async function configureConnector() {
 
   // add a new frame at location
   const frame = await SDK.frame.addFrame(FrameTypeEnum.image, 0, 0, 240, 160);
-  const newFrameId = Number.parseInt(frame.data!);
+  const newFrameId = frame.parsedData.toString();
 
   // set frame image content to use demo connector
   await SDK.frame.setImageFromConnector(newFrameId, 'demo-connector', '240 x 160');
@@ -84,7 +84,7 @@ async function configureConnector() {
   extraInput.addEventListener('change', onQueryChange);
 }
 
-window.onMediaItemClick = async (item: string, frameId: number) => {
+window.onMediaItemClick = async (item: string, frameId: string) => {
   await SDK.frame.setImageFromConnector(frameId, 'demo-connector', item);
 }
 
