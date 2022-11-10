@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@chili-publish/editor-sdk": "^0.70.3",
+    "@chili-publish/editor-sdk": "^0.82.0",
     "@sketchfab/viewer-api": "^1.12.1",
     "html2canvas": "^1.4.1"
   },

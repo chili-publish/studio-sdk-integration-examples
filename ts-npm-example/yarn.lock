@@ -9,10 +9,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@chili-publish/editor-sdk@^0.70.3":
-  version "0.70.3"
-  resolved "https://npm.pkg.github.com/download/@chili-publish/editor-sdk/0.70.3/f97f45dbb55f3aa6f7dae3b2aa4cdd54672d6e68#f97f45dbb55f3aa6f7dae3b2aa4cdd54672d6e68"
-  integrity sha512-KOqSkfjXEiYjdRfXo7H/gFVdQCRnLbhx0XfmWhu7IusAO4F8YgnHo4AmRi7roaxo8IrnnsFH/FRDNlNEtnJysQ==
+"@chili-publish/editor-sdk@^0.82.0":
+  version "0.82.0"
+  resolved "https://registry.yarnpkg.com/@chili-publish/editor-sdk/-/editor-sdk-0.82.0.tgz#c3d06e670fd8014c173424214e443828ccdb8656"
+  integrity sha512-01ziNRLWyhJXsEs8AQ/Rq4613mHn9V25ntuTV/cp4i0lLRc+EAWCbIp3bmJd70xyMfYbnFV3AwLQ77JlmwYnyw==
   dependencies:
     mathjs "^10.0.2"
     penpal "6.1.0"

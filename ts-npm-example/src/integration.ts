@@ -1,4 +1,4 @@
-import ChiliEditorSDK from "@chili-publish/editor-sdk";
+import ChiliEditorSDK, { Frame } from "@chili-publish/editor-sdk";
 import type {
   FrameLayoutType,
   FrameType,
@@ -12,7 +12,7 @@ declare global {
     useSelectTool: () => void;
     useHandTool: () => void;
     useZoomTool: () => void;
-    onLayoutClick: (id: number) => void;
+    onLayoutClick: (id: string) => void;
   }
 }
 
@@ -62,7 +62,7 @@ window.playAnimation = async () => {
 };
 
 // Functions on frame selection
-const onFrameContentChange = (selectedFrameContent: FrameType) => {
+const onFrameContentChange = (selectedFrameContent: Frame) => {
   if (selectedFrameContent) {
     const frameTitleInput = document.getElementById("frameTitle");
     frameTitleInput.setAttribute("value", selectedFrameContent.frameName);
@@ -94,13 +94,13 @@ const onFrameLayoutChange = (selectedFrameLayout: FrameLayoutType) => {
 };
 
 // Select a layout
-window.onLayoutClick = (id: number) => {
+window.onLayoutClick = (id: string) => {
   SDK.layout.selectLayout(id);
 };
 // Function on when a layout has been changed
 const onLayoutsChanged = (
   layouts: LayoutWithFrameProperties[],
-  selectedLayout: number
+  selectedLayout: string
 ) => {
   if (layouts && layouts.length) {
     const listContainer = document.getElementById("layoutList");

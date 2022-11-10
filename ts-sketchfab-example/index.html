@@ -12,25 +12,26 @@
 </head>
 
 <body>
-  <h1 class="page-title">Basic Integrator Demo | CHILI publish</h1>
+  <h1 class="page-title">Sketchfab Integration Demo | CHILI publish</h1>
   <div class="container">
-    <!-- editor div here -->
-    <div class="editor-container" id="chili-editor-example"></div>
     <!-- editor controls here -->
     <div class="editor-controls">
       <section class="buttons-container">
-        <button onclick="sketchFabLoad()">Load SketchFab Model</button>
-        <button onclick="sketchFabToggleAR()">Toggle AR</button>
         <button onclick="sketchFabSetTexture()">Set to screenshot editor</button>
-        <button onclick="sketchFabSetTextureVideo()">Set to mp4 output</button>
+        <button onclick="sketchFabFollowEditor()">Track editor changes</button>
+        <button onclick="sketchFabToggleAR()">Toggle AR</button>
         <br />
       </section>
-      <iframe src="" id="api-frame" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
-        execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true"
-        webkitallowfullscreen="true"></iframe>
-
       </script>
     </div>
+    <div id="content-wrapper">
+      <!-- editor div here -->
+      <div class="editor-container" id="chili-editor-example"></div>
+      <iframe class="editor-container" src="" id="api-frame" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+        execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true"
+        webkitallowfullscreen="true"></iframe>
+    </div>
+
   </div>
   <!-- scripts here -->
   <script src="build/index.js"></script>
