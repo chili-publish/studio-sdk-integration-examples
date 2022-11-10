@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Integrator Demo | CHILI publish</title>
+  <link rel="stylesheet" href="assets/styles/reset.css" />
+  <link rel="stylesheet" href="assets/styles/main.css" />
+  <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+</head>
+
+<body>
+  <h1 class="page-title">Sketchfab Integration Demo | CHILI publish</h1>
+  <div class="container">
+    <!-- editor controls here -->
+    <div class="editor-controls">
+      <section class="buttons-container">
+        <button onclick="sketchFabSetTexture()">Set to screenshot editor</button>
+        <button onclick="sketchFabFollowEditor()">Track editor changes</button>
+        <button onclick="sketchFabToggleAR()">Toggle AR</button>
+        <br />
+      </section>
+      </script>
+    </div>
+    <div id="content-wrapper">
+      <!-- editor div here -->
+      <div class="editor-container" id="chili-editor-example"></div>
+      <iframe class="editor-container" src="" id="api-frame" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+        execution-while-out-of-viewport execution-while-not-rendered web-share allowfullscreen mozallowfullscreen="true"
+        webkitallowfullscreen="true"></iframe>
+    </div>
+
+  </div>
+  <!-- scripts here -->
+  <script src="build/index.js"></script>
+</body>
+
+</html>

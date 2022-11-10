@@ -1,14 +1,16 @@
 {
-  "name": "editor-integration-example-ts-connector",
+  "name": "editor-integration-example-ts-npm",
   "version": "0.0.1",
-  "description": "This is a basic example integration with connectors of the @chili-publish/editor-sdk package with TS and NPM (yarn)",
+  "description": "This is a basic example integration of the @chili-publish/editor-sdk package with TS and NPM (yarn)",
   "main": "index.js",
   "repository": "https://github.com/chili-publish/editor-sdk-integration-examples",
   "author": "chili-publish",
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@chili-publish/editor-sdk": "^0.82.0"
+    "@chili-publish/editor-sdk": "^0.82.0",
+    "@sketchfab/viewer-api": "^1.12.1",
+    "html2canvas": "^1.4.1"
   },
   "devDependencies": {
     "ts-loader": "^9.2.8",
