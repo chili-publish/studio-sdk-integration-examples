@@ -1,5 +1,14 @@
-# Basic TypeScript and NPM example of SDK usage
-This basic example shows how simple it is to make a TypeScript integration, as well as using the SDK via NPM instead of a script.
+# Sketchfab integration example of SDK integration
+This example shows how an integration with third party products can be made using Studio as a enabler.
+
+3 functions are available in the demo:
+
+* Set screenshot editor
+  * Takes a screenshot of the current editor state and transfers it onto the 3D model
+* Track editor changes
+  * Provides live updates to the 3D model whenever the Studio document changes
+* Toggle AR
+  * Experimental toggle to enable AR of sketchfab
 
 ## How to run
 ### Install dependencies
