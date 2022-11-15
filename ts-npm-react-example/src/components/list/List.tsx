@@ -1,5 +1,6 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useMemo } from "react";
 import preventDefault from "../../utils/preventDefault";
+import './List.css';
 
 export type ListItem = {
   key: string;
@@ -9,13 +10,20 @@ export type ListItem = {
 
 type ListProps = {
   listItems: ListItem[];
+  isHorizontal?: boolean;
 };
 
 const List: FC<ListProps> = (props) => {
-  const { listItems } = props;
+  const { listItems, isHorizontal } = props;
+
+  const memorisedListItems = useMemo(() => {
+    return listItems;
+  }, [listItems]);
+
+  console.log(listItems);
   return (
-    <ul>
-      {listItems.map((listItem) => (
+    <ul className={`list${isHorizontal ? " horizontal" : ""}`}>
+      {memorisedListItems.map((listItem) => (
         <li key={listItem.key}>
           {listItem.onClick ? (
             // eslint-disable-next-line jsx-a11y/anchor-is-valid
@@ -23,8 +31,8 @@ const List: FC<ListProps> = (props) => {
               href="#"
               onClick={(event) => {
                 if (listItem.onClick) {
-                    preventDefault(event, listItem.onClick());
-                } 
+                  preventDefault(event, listItem.onClick());
+                }
               }}
             >
               {listItem.value}

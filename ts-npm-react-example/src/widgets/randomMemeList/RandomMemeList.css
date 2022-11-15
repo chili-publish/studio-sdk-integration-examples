@@ -1,0 +1,20 @@
+.meme-img {
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.memelist ul {
+    width: 100%; 
+    padding: 40px 0; 
+}
+
+.memelist ul li {
+    max-width: 20%;
+}
+
+.memelist {
+    background-color: #eee;
+    padding: 0 40px;
+}
