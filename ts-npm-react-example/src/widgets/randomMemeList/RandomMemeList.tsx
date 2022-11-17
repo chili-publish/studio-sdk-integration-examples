@@ -98,12 +98,12 @@ const RandomMemeList: FC<RandomMemeListProps> = (props) => {
             await window.SDK.frame.setFrameHeight(frameId, height);
             await window.SDK.frame.setEnableCopyfitting(frameId, true);
             await window.SDK.frame.setFrameZIndex(frameId, UpdateZIndexMethod.bringToFront);
-            // await window.SDK.animation.setFrameAnimation({
-            //     frameId,
-            //     from: 0,
-            //     to: 5000,
-            //     basicAnimations: createBasicAnimation(slideDirection),
-            // });
+            await window.SDK.animation.setFrameAnimation({
+                frameId,
+                from: 0,
+                to: 5000,
+                basicAnimations: createBasicAnimation(slideDirection),
+            });
         }
     };
 
