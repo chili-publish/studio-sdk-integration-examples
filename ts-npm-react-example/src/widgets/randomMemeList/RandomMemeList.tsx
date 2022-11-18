@@ -98,16 +98,16 @@ const RandomMemeList: FC<RandomMemeListProps> = (props) => {
             await window.SDK.frame.setFrameHeight(frameId, height);
             await window.SDK.frame.setEnableCopyfitting(frameId, true);
             await window.SDK.frame.setFrameZIndex(frameId, UpdateZIndexMethod.bringToFront);
-            await window.SDK.animation.setFrameAnimation({
-                frameId,
-                from: 0,
-                to: 5000,
-                basicAnimations: createBasicAnimation(slideDirection),
-            });
+            // await window.SDK.animation.setFrameAnimation({
+            //     frameId,
+            //     from: 0,
+            //     to: 5000,
+            //     basicAnimations: createBasicAnimation(slideDirection),
+            // });
         }
     };
 
-    const createTextFrames = async (layoutId: string, width: string, height: string) => {
+    const updateTextFrames = async (layoutId: string, width: string, height: string) => {
         // UP
         positionTextFrame(
             'frameUpBR',
@@ -202,9 +202,7 @@ const RandomMemeList: FC<RandomMemeListProps> = (props) => {
 
         if (selectedLayoutId) {
             createNewImageFrame(selectedLayoutId, width, height, meme);
-            createTextFrames(selectedLayoutId, width, height);
-
-            // TODO: add 2 textFrames and manipulate variables in them
+            updateTextFrames(selectedLayoutId, width, height);
         }
     };
 

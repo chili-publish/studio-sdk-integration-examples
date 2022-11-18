@@ -51,7 +51,33 @@ const AuthenticatedActions: FC<AuthenticatedActionsProps> = (props) => {
         }
     };
 
-    const exportGif = async () => {
+    const download = (url: string, extension: string) => {
+        if (url) {
+            // TODO use signed URLs to download result as before. We cannot use the anchor element
+            // trick directly because the download request currently requires the auth header
+            const fetchAsync: () => Promise<void> = async () => {
+                const config = { headers: { Authorization: `Bearer ${accessToken}` } };
+                const response = await fetch(url, config);
+
+                if (response.status !== 200) return;
+
+                const objectUrl = window.URL.createObjectURL(await response.blob());
+                const a = Object.assign(document.createElement('a'), {
+                    href: objectUrl,
+                    style: 'display: none',
+                    download: `export.${extension}`,
+                });
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(objectUrl);
+            };
+
+            fetchAsync();
+        }
+    }
+
+    const exportDoc = async (exportType: 'gif'|'png' ) => {
         const document = await (await window.SDK.document.getCurrentDocumentState()).data;
 
         if (document) {
@@ -63,7 +89,8 @@ const AuthenticatedActions: FC<AuthenticatedActionsProps> = (props) => {
                 },
                 body: document,
             };
-            const url = `${BASE_URL}environment/${ENVIRONMENT.toLocaleLowerCase()}/output/animation?outputType=gif`;
+            const appendix = exportType === 'gif' ? 'animation?outputType=gif' : 'image?outputType=png'
+            const url = `${BASE_URL}environment/${ENVIRONMENT.toLocaleLowerCase()}/output/${appendix}`;
 
             const httpResponse = await fetch(url, requestOptions)
             
@@ -74,34 +101,28 @@ const AuthenticatedActions: FC<AuthenticatedActionsProps> = (props) => {
 
         if ('status' in response) {
             const err = response as ApiError;
-            return {
+            console.error({
                 status: Number.parseInt(err.status),
                 error: err.detail,
                 success: false,
                 parsedData: null,
-            };
+            });
         }
 
         const data = response as GenerateAnimationResponse;
         const pollingResult = await startPollingOnEndpoint(data.links.taskInfo, accessToken);
 
         if (pollingResult === null) {
-            return { status: 500, error: 'Error during polling', success: false, parsedData: null };
+            return console.error({ status: 500, error: 'Error during polling', success: false, parsedData: null });
         }
 
-        return {
-            status: 200,
-            error: null,
-            success: true,
-            parsedData: pollingResult.links.download,
-            data: pollingResult.links.download,
-        };
+        download(pollingResult.links.download, exportType) 
         }
     };
     return (
         <section>
-            <Button onClick={() => exportGif()}>Export to GIF</Button>
-            <Button onClick={() => exportGif()}>Export to PNG</Button>
+            <Button onClick={() => exportDoc('gif')}>Export to GIF</Button>
+            <Button onClick={() => exportDoc('png')}>Export to PNG</Button>
             <Button onClick={() => save()}>Save template</Button>
         </section>
     );
