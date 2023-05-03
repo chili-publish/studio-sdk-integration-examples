@@ -1,0 +1,10 @@
+.button.active {
+    background-color: lightpink;
+    color: white;
+}
+
+.button {
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+}

@@ -1,0 +1,12 @@
+{
+  "id": "meme-st",
+  "version": "1.0.0",
+  "name": "demo",
+  "type": "media",
+  "supportedAuth": [
+    "none"
+  ],
+  "options": {
+  },
+  "script": "\/\/Can be parsed by using https:\/\/www.freeformatter.com\/json-escape.html#before-output f.e.\r\nclass DemoConnector {\r\n  constructor(runtime) {\r\n    this.runtime = runtime;\r\n  }\r\n  async query(options, context) {\r\n    const data = await this.runtime.fetch(\r\n      \"https:\/\/api.imgflip.com\/get_memes\",\r\n      {}\r\n    );\r\n\r\n    const newArray = [];\r\n\r\n    JSON.parse(data.text).data.memes.forEach((meme) =>\r\n      newArray.push({\r\n        id: meme.url,\r\n        name: meme.name,\r\n        relativePath: \"\/Root\",\r\n        type: 0,\r\n        metaData: {\r\n          \"width\": String(meme.width),\r\n          \"height\": String(meme.height)\r\n        }\r\n      })\r\n    );\r\n\r\n    return Promise.resolve({\r\n      pageSize: newArray.length,\r\n      data: newArray,\r\n      links: { nextPageToken: \"\" },\r\n    });\r\n  }\r\n  async download(id, previewType, context) {\r\n    return (\r\n      await this.runtime.fetch(\r\n        id,\r\n        {}\r\n      )\r\n    ).arrayBuffer;\r\n  }\r\n  upload(name, blob) {\r\n    throw new Error(\"Method not implemented.\");\r\n  }\r\n  remove(id) {\r\n    throw new Error(\"Method not implemented.\");\r\n  }\r\n  copy(id, newName) {\r\n    throw new Error(\"Method not implemented.\");\r\n  }\r\n  getQueryOptions() {\r\n    return [\"extraItem\"];\r\n  }\r\n  getDownloadOptions() {\r\n    return [];\r\n  }\r\n  getCapabilities() {\r\n    return {\r\n      copy: false,\r\n      filtering: true,\r\n      query: true,\r\n      remove: false,\r\n      upload: false,\r\n    };\r\n  }\r\n}\r\n"
+}
